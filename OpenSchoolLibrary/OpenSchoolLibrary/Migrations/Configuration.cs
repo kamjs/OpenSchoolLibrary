@@ -1,5 +1,6 @@
 namespace OpenSchoolLibrary.Migrations
 {
+    using OpenSchoolLibrary.Domain;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,6 +15,10 @@ namespace OpenSchoolLibrary.Migrations
 
         protected override void Seed(OpenSchoolLibrary.Domain.LibraryContext context)
         {
+
+            context.Librarians.Add(new Librarian { FirstName = "Jane", LastName = "Elliot" });
+            context.SaveChanges();
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
