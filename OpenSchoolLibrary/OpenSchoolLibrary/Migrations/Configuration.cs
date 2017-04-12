@@ -15,8 +15,7 @@ namespace OpenSchoolLibrary.Migrations
 
         protected override void Seed(LibraryContext context)
         {
-
-            context.Librarians.Add(new Librarian { FirstName = "Jane", LastName = "Elliot" });
+            context.Librarians.AddOrUpdate(new Librarian { FirstName = "Jane", LastName = "Elliot" });
             context.SaveChanges();
 
             //  This method will be called after migrating to the latest version.
