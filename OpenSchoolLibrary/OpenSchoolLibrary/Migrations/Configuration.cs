@@ -13,7 +13,7 @@ namespace OpenSchoolLibrary.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(OpenSchoolLibrary.Domain.LibraryContext context)
+        protected override void Seed(LibraryContext context)
         {
 
             context.Librarians.Add(new Librarian { FirstName = "Jane", LastName = "Elliot" });
