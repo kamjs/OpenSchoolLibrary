@@ -9,7 +9,7 @@ namespace OpenSchoolLibrary.Domain
 {
     public class LibraryContext : DbContext
     {
-        public LibraryContext() : base("ConnectionString")
+        public LibraryContext() : base("OpenSchoolLibrary")
         {
             Database.SetInitializer<LibraryContext>(new CreateDatabaseIfNotExists<LibraryContext>());
         }
