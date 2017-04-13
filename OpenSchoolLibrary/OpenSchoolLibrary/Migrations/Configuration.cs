@@ -18,6 +18,13 @@ namespace OpenSchoolLibrary.Migrations
             context.Librarians.AddOrUpdate(new Librarian { FirstName = "Jane", LastName = "Elliot" });
             context.SaveChanges();
 
+            context.Patrons.AddOrUpdate(
+            new Patron { FirstName = "John", LastName = "Jones", Grade = 6, HomeRoomTeacher = "Mrs. Kensworth", LibraryCard = "012345", OptionalSecret = "Ghosts" },
+            new Patron { FirstName = "Kim", LastName = "Elliot", Grade = 8, HomeRoomTeacher = "Mr. Johanson", LibraryCard = "014545B", OptionalSecret = "" }
+            );
+            context.SaveChanges();
+
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
