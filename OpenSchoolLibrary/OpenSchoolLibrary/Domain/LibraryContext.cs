@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
+using OpenSchoolLibrary.Models;
 
 namespace OpenSchoolLibrary.Domain
 {
@@ -17,6 +18,6 @@ namespace OpenSchoolLibrary.Domain
 
         public DbSet<Patron> Patrons { get; set; }
         public DbSet<Librarian> Librarians { get; set; }
-
+        public DbSet<Book> Books { get; set; }
     }
 }
