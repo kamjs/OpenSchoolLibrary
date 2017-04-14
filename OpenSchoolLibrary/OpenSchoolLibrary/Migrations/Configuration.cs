@@ -10,7 +10,7 @@ namespace OpenSchoolLibrary.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(LibraryContext context)
@@ -22,6 +22,13 @@ namespace OpenSchoolLibrary.Migrations
             new Patron { FirstName = "John", LastName = "Jones", Grade = 6, HomeRoomTeacher = "Mrs. Kensworth", LibraryCard = "012345", OptionalSecret = "Ghosts" },
             new Patron { FirstName = "Kim", LastName = "Elliot", Grade = 8, HomeRoomTeacher = "Mr. Johanson", LibraryCard = "014545B", OptionalSecret = "" }
             );
+            context.SaveChanges();
+
+            context.Generes.AddOrUpdate(
+                new Genre { Name = "Horror" },
+                new Genre { Name = "Science Fiction" },
+                new Genre { Name = "Romance" }
+                );
             context.SaveChanges();
 
 
