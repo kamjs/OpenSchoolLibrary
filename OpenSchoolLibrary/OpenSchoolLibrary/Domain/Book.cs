@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace OpenSchoolLibrary.Models
+namespace OpenSchoolLibrary.Domain
 {
     public class Book
     {
