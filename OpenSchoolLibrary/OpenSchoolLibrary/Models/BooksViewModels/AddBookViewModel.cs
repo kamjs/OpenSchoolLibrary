@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace OpenSchoolLibrary.Models.BooksViewModels
 {
-    public class CreateBookViewModel
+    public class AddBookViewModel
     {
         public int ID { get; set; }
         public string Title { get; set; }

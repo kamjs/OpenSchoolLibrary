@@ -38,9 +38,9 @@ namespace OpenSchoolLibrary.Controllers
         }
 
         // GET: Books/Create
-        public ActionResult Create()
+        public ActionResult Add()
         {
-            var model = new CreateBookViewModel()
+            var model = new AddBookViewModel()
             {
                 GenreList = new SelectList(db.Generes.Select(b => new { b.ID, b.Name }).ToList(), "ID", "Name")
             };
@@ -52,7 +52,7 @@ namespace OpenSchoolLibrary.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,SubTitle,Author,ISBN,ISBN13,Condition,CatalogID,Genre")] Book book)
+        public ActionResult Add([Bind(Include = "ID,Title,SubTitle,Author,ISBN,ISBN13,Condition,CatalogID,Genre")] Book book)
         {
             if (ModelState.IsValid)
             {
