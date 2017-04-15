@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace OpenSchoolLibrary.Models.BooksViewModels
 {
@@ -15,6 +16,8 @@ namespace OpenSchoolLibrary.Models.BooksViewModels
         public int ISBN13 { get; set; }
         public int Condition { get; set; }
         public string CatalogID { get; set; }
-        public string Genre { get; set; }
+        public int Genre { get; set; }
+
+        public SelectList GenreList { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using OpenSchoolLibrary.Domain;
 using OpenSchoolLibrary.Models;
+using OpenSchoolLibrary.Models.BooksViewModels;
 
 namespace OpenSchoolLibrary.Controllers
 {
@@ -39,7 +40,11 @@ namespace OpenSchoolLibrary.Controllers
         // GET: Books/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new CreateBookViewModel()
+            {
+                GenreList = new SelectList(db.Generes.Select(b => new { b.ID, b.Name }).ToList(), "ID", "Name")
+            };
+            return View(model);
         }
 
         // POST: Books/Create
