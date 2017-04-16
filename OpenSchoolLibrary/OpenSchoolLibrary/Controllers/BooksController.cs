@@ -9,12 +9,22 @@ using System.Web.Mvc;
 using OpenSchoolLibrary.Domain;
 using OpenSchoolLibrary.Models;
 using OpenSchoolLibrary.Models.BooksViewModels;
+using System.Collections;
 
 namespace OpenSchoolLibrary.Controllers
 {
     public class BooksController : Controller
     {
         private LibraryContext db = new LibraryContext();
+
+        public enum BookConditions
+        {
+            Excellent,
+            Good,
+            Fair,
+            Used,
+            Bad
+        }
 
         // GET: Books
         public ActionResult Index()
@@ -40,12 +50,17 @@ namespace OpenSchoolLibrary.Controllers
         // GET: Books/Create
         public ActionResult Add()
         {
+
             var model = new AddBookViewModel()
             {
                 GenreList = new SelectList(db.Generes.Select(b => new { b.ID, b.Name }).ToList(), "ID", "Name")
             };
+            
+
             return View(model);
         }
+
+        
 
         // POST: Books/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
