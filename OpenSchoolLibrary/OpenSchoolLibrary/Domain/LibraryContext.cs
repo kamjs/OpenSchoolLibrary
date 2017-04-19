@@ -13,7 +13,8 @@ namespace OpenSchoolLibrary.Domain
     {
         public LibraryContext() : base("OpenSchoolLibrary")
         {
-            Database.SetInitializer<LibraryContext>(new CreateDatabaseIfNotExists<LibraryContext>());
+            //Database.SetInitializer<LibraryContext>(new CreateDatabaseIfNotExists<LibraryContext>());
+            Database.SetInitializer<LibraryContext>(new DropCreateDatabaseIfModelChanges<LibraryContext>());
         }
 
         public DbSet<Patron> Patrons { get; set; }
