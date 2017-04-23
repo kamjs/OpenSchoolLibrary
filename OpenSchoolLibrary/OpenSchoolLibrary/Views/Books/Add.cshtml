@@ -12,6 +12,11 @@
         var isbn13 = document.querySelector("input[name=ISBN13]");
         var pattern = new RegExp("(?:(?=.{17}$)97[89][ -](?:[0-9]+[ -]){2}[0-9]+[ -][0-9]|97[89][0-9]{10}|(?=.{13}$)(?:[0-9]+[ -]){2}[0-9]+[ -][0-9Xx]|[0-9]{9}[0-9Xx])");
 
+
+        document.getElementById("ISBNError").textContent = "";
+        document.getElementById("ISBN13Error").textContent = "";
+
+
         if (!isbn.value && !isbn13.value) {
             document.getElementById("ISBNError").textContent = "ISBN and ISBN 13 can not both be blank.";
             document.getElementById("ISBN13Error").textContent = "ISBN and ISBN 13 can not both be blank.";
@@ -19,14 +24,25 @@
 
             return false;
         }
-        else {
-            document.getElementById("ISBNError").textContent = "";
-            document.getElementById("ISBN13Error").textContent = "";
+
+        if (isbn.value == isbn13.value) {
+            document.getElementById("ISBNError").textContent = "ISBN and ISBN 13 can not be the same.";
+            document.getElementById("ISBN13Error").textContent = "ISBN and ISBN 13 can not be the same.";
+            isbn.focus();
+
+            return false;
+        }
+
+        if (!pattern.test(isbn.value)) {
+            document.getElementById("ISBNError").textContent = "ISBN not valid.";
+            isbn.focus();
+
+            return false;
         }
 
         return true;
     }
-    </script>
+</script>
 
 @using (Html.BeginForm())
 {
@@ -66,7 +82,7 @@
                     <label>ISBN:</label>
                 </div>
                 <div class="col-md-10">
-                    <input type="number" name="ISBN" class="form-control" required>
+                    <input type="number" name="ISBN" class="form-control">
                     <div id="ISBNError" class="text-danger"></div>
                 </div>
             </div>
@@ -76,7 +92,7 @@
                     <label>ISBN 13:</label>
                 </div>
                 <div class="col-md-10">
-                    <input type="number" name="ISBN13" class="form-control" required>
+                    <input type="number" name="ISBN13" class="form-control">
                     <div id="ISBN13Error" class="text-danger"></div>
                 </div>
             </div>
