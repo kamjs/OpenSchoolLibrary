@@ -11,7 +11,7 @@ namespace OpenSchoolLibrary.Domain
 {
     public class LibraryContext : DbContext
     {
-        public LibraryContext() : base("OpenSchoolLibrary")
+        public LibraryContext() : base("Express")
         {
             //Database.SetInitializer<LibraryContext>(new CreateDatabaseIfNotExists<LibraryContext>());
             Database.SetInitializer<LibraryContext>(new DropCreateDatabaseIfModelChanges<LibraryContext>());
