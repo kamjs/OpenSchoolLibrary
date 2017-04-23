@@ -6,46 +6,8 @@
 
 <h2>@ViewBag.Title</h2>
 
-<script type="text/javascript">textContent
-    function ISBNorISBN13() {      
-        var isbn = document.querySelector("input[name=ISBN]");
-        var isbn13 = document.querySelector("input[name=ISBN13]");
-        var pattern = new RegExp("(?:(?=.{17}$)97[89][ -](?:[0-9]+[ -]){2}[0-9]+[ -][0-9]|97[89][0-9]{10}|(?=.{13}$)(?:[0-9]+[ -]){2}[0-9]+[ -][0-9Xx]|[0-9]{9}[0-9Xx])");
 
-
-        document.getElementById("ISBNError").textContent = "";
-        document.getElementById("ISBN13Error").textContent = "";
-
-
-        if (!isbn.value && !isbn13.value) {
-            document.getElementById("ISBNError").textContent = "ISBN and ISBN 13 can not both be blank.";
-            document.getElementById("ISBN13Error").textContent = "ISBN and ISBN 13 can not both be blank.";
-            isbn.focus();
-
-            return false;
-        }
-
-        if (isbn.value == isbn13.value) {
-            document.getElementById("ISBNError").textContent = "ISBN and ISBN 13 can not be the same.";
-            document.getElementById("ISBN13Error").textContent = "ISBN and ISBN 13 can not be the same.";
-            isbn.focus();
-
-            return false;
-        }
-
-        if (!pattern.test(isbn.value)) {
-            document.getElementById("ISBNError").textContent = "ISBN not valid.";
-            isbn.focus();
-
-            return false;
-        }
-
-        return true;
-    }
-</script>
-
-@using (Html.BeginForm())
-{
+<form class="add-book">
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
@@ -124,11 +86,11 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" onclick="return ISBNorISBN13()" class="btn btn-default" />
+                    <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
         </div>
-}
+</form>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -137,3 +99,49 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script type="text/javascript">
+
+    document.querySelector('.add-book').addEventListener('submit', (ev) => {
+
+        var isbn = document.querySelector("input[name=ISBN]");
+        var isbn13 = document.querySelector("input[name=ISBN13]");
+        var pattern = new RegExp("(?:(?=.{17}$)97[89][ -](?:[0-9]+[ -]){2}[0-9]+[ -][0-9]|97[89][0-9]{10}|(?=.{13}$)(?:[0-9]+[ -]){2}[0-9]+[ -][0-9Xx]|[0-9]{9}[0-9Xx])");
+
+
+        document.getElementById("ISBNError").textContent = "";
+        document.getElementById("ISBN13Error").textContent = "";
+
+
+        if (!isbn.value && !isbn13.value) {
+            document.getElementById("ISBNError").textContent = "ISBN and ISBN 13 can not both be blank.";
+            document.getElementById("ISBN13Error").textContent = "ISBN and ISBN 13 can not both be blank.";
+            isbn.focus();
+
+            ev.preventDefault();
+        }
+
+        if (isbn.value == isbn13.value) {
+            document.getElementById("ISBNError").textContent = "ISBN and ISBN 13 can not be the same.";
+            document.getElementById("ISBN13Error").textContent = "ISBN and ISBN 13 can not be the same.";
+            isbn.focus();
+
+            ev.preventDefault();
+        }
+
+        if (!pattern.test(isbn13.value)) {
+            document.getElementById("ISBNError13").textContent = "ISBN 13 not valid.";
+            isbn13.focus();
+
+            ev.preventDefault();
+        }
+
+        if (!pattern.test(isbn.value)) {
+            document.getElementById("ISBNError").textContent = "ISBN not valid.";
+            isbn.focus();
+
+            ev.preventDefault();
+        }
+    })
+
+</script>
