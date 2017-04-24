@@ -67,16 +67,35 @@ namespace OpenSchoolLibrary.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "ID,Title,SubTitle,Author,ISBN,ISBN13,Condition,CatalogID,Genre")] Book book)
+        public ActionResult Add(AddBookViewModel book)
         {
             if (ModelState.IsValid)
             {
-                db.Books.Add(book);
-                db.SaveChanges();
+                //db.Books.Add(book);
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(book);
+        }
+
+        // GET: ISBN Check
+        [HttpGet]
+        public ActionResult ISBNCheck(int? isbn, int? isbn13)
+        {
+            var model = new AddBookViewModel()
+            {
+                GenreList = new SelectList(db.Generes.Select(b => new { b.ID, b.Name }).ToList(), "ID", "Name")
+            };
+
+            return View("Add", model);
+        }
+
+        // POST: Books
+        [HttpPost]
+        public ActionResult IncrementBook()
+        {
+            return View();
         }
 
         // GET: Books/Edit/5

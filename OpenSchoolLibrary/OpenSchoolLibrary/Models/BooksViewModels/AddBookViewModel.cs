@@ -28,8 +28,6 @@ namespace OpenSchoolLibrary.Models.BooksViewModels
         [Required(ErrorMessage = "Condition is Required")]
         public int Condition { get; set; }
 
-        [Required(ErrorMessage = "Catalog ID is Required")]
-        [Display(Name = "Catalog ID")]
         public string CatalogID { get; set; }
 
         [Required(ErrorMessage = "Genre is Required")]
