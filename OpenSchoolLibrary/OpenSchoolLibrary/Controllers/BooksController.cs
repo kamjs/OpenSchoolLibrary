@@ -81,7 +81,7 @@ namespace OpenSchoolLibrary.Controllers
 
         // GET: ISBN Check
         [HttpGet]
-        public ActionResult ISBNCheck(int? isbn, int? isbn13)
+        public ActionResult ISBNCheck(int? isbn, long? isbn13)
         {
             var model = new AddBookViewModel()
             {

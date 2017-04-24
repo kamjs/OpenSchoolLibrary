@@ -31,6 +31,10 @@ namespace OpenSchoolLibrary.Migrations
                 );
             context.SaveChanges();
 
+            context.Books.AddOrUpdate(
+                new Book { Title = "", SubTitle="", Author = "", CatalogID ="", Condition=1, Genre=3, ISBN= 0198526636, ISBN13= 9783161484100 }
+                );
+
 
             //  This method will be called after migrating to the latest version.
 

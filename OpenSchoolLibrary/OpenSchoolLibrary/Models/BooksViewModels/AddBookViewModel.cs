@@ -23,7 +23,7 @@ namespace OpenSchoolLibrary.Models.BooksViewModels
         public int ISBN { get; set; }
 
         [Display(Name = "ISBN-13")]
-        public int ISBN13 { get; set; }
+        public long ISBN13 { get; set; }
 
         [Required(ErrorMessage = "Condition is Required")]
         public int Condition { get; set; }
