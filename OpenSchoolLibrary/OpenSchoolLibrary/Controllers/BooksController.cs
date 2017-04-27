@@ -83,6 +83,11 @@ namespace OpenSchoolLibrary.Controllers
         [HttpGet]
         public ActionResult ISBNCheck(int? isbn, long? isbn13)
         {
+            var isbnResult = CheckForExistingISBN(isbn);
+
+            var isbn13Result = CheckForExistingISBN13(isbn13);
+
+
             var model = new AddBookViewModel()
             {
                 GenreList = new SelectList(db.Generes.Select(b => new { b.ID, b.Name }).ToList(), "ID", "Name")
@@ -90,6 +95,16 @@ namespace OpenSchoolLibrary.Controllers
 
             return View("Add", model);
         }
+
+        public bool CheckForExistingISBN(int? isbn) => db.Books.Any(b => b.ISBN == isbn);
+
+        public bool CheckForExistingISBN13(long? isbn13) => db.Books.Any(b => b.ISBN == isbn13);
+
+        //TODO
+        //public bool CheckForExistingISBN13(long isbn13)
+        //{
+
+        //}
 
         // POST: Books
         [HttpPost]
