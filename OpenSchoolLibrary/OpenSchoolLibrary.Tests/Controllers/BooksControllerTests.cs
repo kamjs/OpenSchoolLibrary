@@ -11,7 +11,16 @@ namespace OpenSchoolLibrary.Tests.Controllers
     {
         [Theory]
         [InlineData(1566199093)]
+        [InlineData(1402894627)]
         public void ValidISBN(string isbn)
+        {
+
+        }
+
+        [Theory]
+        [InlineData(9781566199094)]
+        [InlineData(9781402894626)]
+        public void ValidISBN13(long isbn13)
         {
 
         }

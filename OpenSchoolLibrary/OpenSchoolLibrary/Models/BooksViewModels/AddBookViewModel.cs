@@ -20,7 +20,7 @@ namespace OpenSchoolLibrary.Models.BooksViewModels
         [Required(ErrorMessage = "Author is Required")]
         public string Author { get; set; }
 
-        public int ISBN { get; set; }
+        public string ISBN { get; set; }
 
         [Display(Name = "ISBN-13")]
         public long ISBN13 { get; set; }
