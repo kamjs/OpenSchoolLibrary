@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenSchoolLibrary;
 using OpenSchoolLibrary.Controllers;
-using Xunit;
 
 namespace OpenSchoolLibrary.Tests.Controllers
 {
