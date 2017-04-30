@@ -26,7 +26,7 @@
                 <label>ISBN 13:</label>
             </div>
             <div class="col-md-10">
-                <input type="text" name="ISBN13" pattern="[97(8|9)]{3}[0-9]{10}" placeholder="Only one is required." class="form-control">
+                <input type="text" name="ISBN13" pattern="97[89][0-9]{10}" placeholder="Only one is required." class="form-control">
                 <div class="ISBN13Error text-danger"></div>
             </div>
         </div>
@@ -44,7 +44,7 @@
     @Html.AntiForgeryToken()
 </form>
 
-<form class="add-book" action="/books/add" method="post">
+<form class="add-book hidden" action="/books/add" method="post">
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
             <div class="form-group">
@@ -124,14 +124,19 @@
 
     document.addEventListener("DOMContentLoaded", function (event) {
         console.log("DOM fully loaded and parsed");
-        
+
+        console.log("@Model.Entry");
+
+        if ("@Model.Entry" == "Add") {
+            document.querySelector('.add-book').classList.remove("hidden");
+        }
 
     document.querySelector('.isbncheck').addEventListener('submit', (ev) => {
         console.log("isbn entry");
         var isbn = document.querySelector("input[name=ISBN]");
         var isbn13 = document.querySelector("input[name=ISBN13]");
         var isbnPattern = new RegExp("[0-9]{9}[0-9X]");
-        var isbn13Pattern = new RegExp("[97(8|9)]{3}[0-9]{10}");
+        var isbn13Pattern = new RegExp("97[89][0-9]{10}");
 
         document.querySelector('.ISBNError').textContent = "";
         document.querySelector('.ISBN13Error').textContent = "";
