@@ -73,5 +73,15 @@ namespace OpenSchoolLibrary.Tests.Validations
 
             Assert.False(sut);
         }
+
+        [Fact]
+        public void Improper_ISBN13_Not_Starting_With_978_Will_Fail_to_Validate()
+        {
+            string isbn = "4561402894627";
+
+            var sut = ISBNValidation.ValidateISBN13(isbn);
+
+            Assert.False(sut);
+        }
     }
 }

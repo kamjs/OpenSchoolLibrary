@@ -49,6 +49,9 @@ namespace OpenSchoolLibrary.Domain.Validations
                 isbn.Length < 13)
                 return false;
 
+            if (isbn.Substring(0, 3) != "978")
+                return false;
+
             int[] sequence = isbn.Select(c => Convert.ToInt32(c.ToString())).ToArray();
 
             var sum = sequence[0] * 1 + sequence[1] * 3 + sequence[2] * 1 +
