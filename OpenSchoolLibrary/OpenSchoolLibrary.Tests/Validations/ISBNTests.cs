@@ -54,12 +54,24 @@ namespace OpenSchoolLibrary.Tests.Validations
 
         }
 
-        //[Fact]
-        //[InlineData(9781566199094)]
-        //[InlineData(9781402894626)]
-        //public void ValidISBN13(long isbn13)
-        //{
+        [Fact]
+        public void Proper_ISBN13_Will_Validate()
+        {
+            string isbn = "9781402894626";
 
-        //}
+            var sut = ISBNValidation.ValidateISBN13(isbn);
+
+            Assert.True(sut);
+        }
+
+        [Fact]
+        public void Improper_ISBN13_Will_Fail_to_Validate()
+        {
+            string isbn = "9781402894627";
+
+            var sut = ISBNValidation.ValidateISBN13(isbn);
+
+            Assert.False(sut);
+        }
     }
 }
