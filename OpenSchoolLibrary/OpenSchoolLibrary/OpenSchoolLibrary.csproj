@@ -181,6 +181,7 @@
     <Compile Include="Domain\Librarian.cs" />
     <Compile Include="Domain\LibraryContext.cs" />
     <Compile Include="Domain\Patron.cs" />
+    <Compile Include="Domain\Validations\ISBNValidation.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
