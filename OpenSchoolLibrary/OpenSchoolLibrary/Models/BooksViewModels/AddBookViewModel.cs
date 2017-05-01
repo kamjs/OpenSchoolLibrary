@@ -35,6 +35,5 @@ namespace OpenSchoolLibrary.Models.BooksViewModels
 
         public SelectList GenreList { get; set; }
 
-        public Enum Entry { get; set; }
     }
 }

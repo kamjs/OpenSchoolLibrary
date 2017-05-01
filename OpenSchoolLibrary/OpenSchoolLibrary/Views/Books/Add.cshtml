@@ -125,12 +125,6 @@
     document.addEventListener("DOMContentLoaded", function (event) {
         console.log("DOM fully loaded and parsed");
 
-        console.log("@Model.Entry");
-
-        if ("@Model.Entry" == "Add") {
-            document.querySelector('.add-book').classList.remove("hidden");
-        }
-
     document.querySelector('.isbncheck').addEventListener('submit', (ev) => {
         console.log("isbn entry");
         var isbn = document.querySelector("input[name=ISBN]");

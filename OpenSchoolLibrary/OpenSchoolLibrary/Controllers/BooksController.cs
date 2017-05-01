@@ -26,13 +26,6 @@ namespace OpenSchoolLibrary.Controllers
             Bad
         }
 
-        enum NewBookStatus
-        {
-            Unknown,
-            Add,
-            Increment
-        }
-
         // GET: Books
         public ActionResult Index()
         {
@@ -60,8 +53,7 @@ namespace OpenSchoolLibrary.Controllers
 
             var model = new AddBookViewModel()
             {
-                GenreList = new SelectList(db.Generes.Select(b => new { b.ID, b.Name }).ToList(), "ID", "Name"),
-                Entry = NewBookStatus.Unknown
+                GenreList = new SelectList(db.Generes.Select(b => new { b.ID, b.Name }).ToList(), "ID", "Name")
             };
             
 
@@ -99,8 +91,7 @@ namespace OpenSchoolLibrary.Controllers
 
             var model = new AddBookViewModel()
             {
-                GenreList = new SelectList(db.Generes.Select(b => new { b.ID, b.Name }).ToList(), "ID", "Name"),
-                Entry = NewBookStatus.Add
+                GenreList = new SelectList(db.Generes.Select(b => new { b.ID, b.Name }).ToList(), "ID", "Name")
             };
 
             return View("Add", model);
