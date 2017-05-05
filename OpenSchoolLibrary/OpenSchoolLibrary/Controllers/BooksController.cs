@@ -18,6 +18,16 @@ namespace OpenSchoolLibrary.Controllers
     {
         private LibraryContext db = new LibraryContext();
 
+        public BooksController(LibraryContext db)
+        {
+            this.db = db;
+        }
+
+        public BooksController()
+        {
+
+        }
+
         public enum BookConditions
         {
             Excellent,
@@ -50,6 +60,7 @@ namespace OpenSchoolLibrary.Controllers
 
 
         // GET: Books/Add
+        [HttpGet]
         public ActionResult Add()
         {
             return View();
@@ -64,7 +75,7 @@ namespace OpenSchoolLibrary.Controllers
             if (isbn == "" && isbn13 == "")
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Both ISBNs were blank. Do not disable JavaScript and please try again.");
 
-            if (BookValidations.BookAlreadyExists(isbn, isbn13))
+            if (BookAlreadyExists(isbn, isbn13))
             {
                 return Redirect($@"/Books/IncrementBook/?isbn={HttpUtility.UrlEncode(isbn)}&isbn13={HttpUtility.UrlEncode(isbn13)}");
             }
@@ -74,6 +85,7 @@ namespace OpenSchoolLibrary.Controllers
             }
         }
 
+        private bool BookAlreadyExists(string isbn, string isbn13) => db.Books.Any(b => b.ISBN == isbn || b.ISBN13 == isbn13);
 
         // GET: Books/AddNewBook
         [HttpGet]
