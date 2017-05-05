@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using OpenSchoolLibrary.Domain;
 using OpenSchoolLibrary.Models;
 using OpenSchoolLibrary.Models.BooksViewModels;
+using OpenSchoolLibrary.Domain.Validations;
 using System.Collections;
 
 namespace OpenSchoolLibrary.Controllers
@@ -47,27 +48,51 @@ namespace OpenSchoolLibrary.Controllers
             return View(book);
         }
 
-        // GET: Books/Create
+
+        // GET: Books/Add
         public ActionResult Add()
         {
+            return View();
+        }
 
-            var model = new AddBookViewModel()
+
+        // POST: Books/Add
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(string isbn, string isbn13)
+        {
+            if (isbn == "" && isbn13 == "")
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Both ISBNs were blank. Do not disable JavaScript and please try again.");
+
+            if (BookValidations.BookAlreadyExists(isbn, isbn13))
             {
-                GenreList = new SelectList(db.Generes.Select(b => new { b.ID, b.Name }).ToList(), "ID", "Name")
+                return Redirect($@"/Books/IncrementBook/?isbn={HttpUtility.UrlEncode(isbn)}&isbn13={HttpUtility.UrlEncode(isbn13)}");
+            }
+            else
+            {
+                return Redirect($@"/Books/AddNewBook/?isbn={HttpUtility.UrlEncode(isbn)}&isbn13={HttpUtility.UrlEncode(isbn13)}");
+            }
+        }
+
+
+        // GET: Books/AddNewBook
+        [HttpGet]
+        public ActionResult AddNewBook(string isbn, string isbn13)
+        {
+            var model = new AddNewBookViewModel()
+            {
+                GenreList = new SelectList(db.Generes.Select(b => new { b.ID, b.Name }).ToList(), "ID", "Name"),
+                ISBN = isbn,
+                ISBN13 = isbn13
             };
-            
 
             return View(model);
         }
 
-        
-
-        // POST: Books/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Books/AddNewBook
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(AddBookViewModel book)
+        public ActionResult AddNewBook(AddNewBookViewModel book)
         {
             if (ModelState.IsValid)
             {
@@ -76,36 +101,8 @@ namespace OpenSchoolLibrary.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(book);
+            return View();
         }
-
-        // GET: ISBN Check
-        [HttpGet]
-        public ActionResult ISBNCheck(string isbn, long? isbn13)
-        {
-            var isbnResult = CheckForExistingISBN(isbn);
-
-            var isbn13Result = CheckForExistingISBN13(isbn13);
-
-            
-
-            var model = new AddBookViewModel()
-            {
-                GenreList = new SelectList(db.Generes.Select(b => new { b.ID, b.Name }).ToList(), "ID", "Name")
-            };
-
-            return View("Add", model);
-        }
-
-        public bool CheckForExistingISBN(string isbn) => db.Books.Any(b => b.ISBN == isbn);
-
-        public bool CheckForExistingISBN13(long? isbn13) => db.Books.Any(b => b.ISBN13 == isbn13);
-
-        //TODO
-        //public bool CheckForExistingISBN13(long isbn13)
-        //{
-
-        //}
 
         // POST: Books
         [HttpPost]

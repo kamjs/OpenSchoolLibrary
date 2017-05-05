@@ -181,6 +181,7 @@
     <Compile Include="Domain\Librarian.cs" />
     <Compile Include="Domain\LibraryContext.cs" />
     <Compile Include="Domain\Patron.cs" />
+    <Compile Include="Domain\Validations\BookValidations.cs" />
     <Compile Include="Domain\Validations\ISBNValidation.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -188,7 +189,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\Book.cs" />
-    <Compile Include="Models\BooksViewModels\AddBookViewModel.cs" />
+    <Compile Include="Models\BooksViewModels\AddNewBookViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -272,6 +273,7 @@
     <Content Include="Views\Books\Edit.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
     <Content Include="Views\Shared\_AddBook.cshtml" />
+    <Content Include="Views\Books\AddNewBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
