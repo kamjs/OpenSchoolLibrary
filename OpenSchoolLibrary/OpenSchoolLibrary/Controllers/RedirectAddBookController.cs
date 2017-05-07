@@ -19,11 +19,8 @@ namespace OpenSchoolLibrary.Controllers
         public RedirectAddBookController() : this( new CheckForExistingIsbnInDb( new LibraryContext() ) ) { }
 
 
-
-
-
         // POST: Books/Add
-        [HttpPost, Route("books/add")]
+        [HttpPost, Route("isbn/check")]
         [ValidateAntiForgeryToken]
         public async Task<RedirectResult> Add(string isbn, string isbn13)
         {
