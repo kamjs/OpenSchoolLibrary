@@ -14,11 +14,6 @@ namespace OpenSchoolLibrary.Domain
             this.libraryContext = libraryContext;
         }
 
-        public Task<bool> Exists(string isbn, string isbn13)
-        {
-            throw new NotImplementedException();
-        }
-
-        //public async Task<bool> Exists(string isbn, string isbn13) => await libraryContext.Books.AnyAsync(b => b.ISBN == isbn || b.ISBN13 == isbn13);
+        public async Task<bool> Exists(string isbn, string isbn13) => await libraryContext.Books.AnyAsync(b => b.ISBN == isbn || b.ISBN13 == isbn13);
     }
 }   
