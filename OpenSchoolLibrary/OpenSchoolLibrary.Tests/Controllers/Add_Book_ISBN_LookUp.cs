@@ -19,10 +19,10 @@ namespace OpenSchoolLibrary.Tests.Controllers
             var stubCheck = new StubCheckForExistingISBN();
             await stubCheck.Exists("0198526636", "");
 
-            var books = new BooksController(stubCheck);
+            var redirect = new RedirectAddBookController(stubCheck);
 
             //Act
-            var redirectResult = await books.Add("0198526636", "");
+            var redirectResult = await redirect.Add("0198526636", "");
 
             Assert.True(redirectResult.Url != null);
         }
@@ -34,10 +34,10 @@ namespace OpenSchoolLibrary.Tests.Controllers
             var stubCheck = new StubCheckForExistingISBN();
             await stubCheck.Exists("", "9783161484100");
 
-            var books = new BooksController(stubCheck);
+            var redirect = new RedirectAddBookController(stubCheck);
 
             //Act
-            var redirectResult = await books.Add("", "9783161484100");
+            var redirectResult = await redirect.Add("", "9783161484100");
 
             Assert.True(redirectResult.Url != null);
         }
@@ -50,10 +50,10 @@ namespace OpenSchoolLibrary.Tests.Controllers
             var stubCheck = new StubCheckForExistingISBN();
             await stubCheck.Exists("0198526636", "");
 
-            var books = new BooksController(stubCheck);
+            var redirect = new RedirectAddBookController(stubCheck);
 
             //Act
-            var redirectResult = await books.Add("0198526636", "");
+            var redirectResult = await redirect.Add("0198526636", "");
 
             Assert.Equal("/Books/IncrementBook/?isbn=0198526636&isbn13=", redirectResult.Url);
         }
@@ -65,10 +65,10 @@ namespace OpenSchoolLibrary.Tests.Controllers
             var stubCheck = new StubCheckForExistingISBN();
             await stubCheck.Exists("", "9783161484100");
 
-            var books = new BooksController(stubCheck);
+            var redirect = new RedirectAddBookController(stubCheck);
 
             //Act
-            var redirectResult = await books.Add("", "9783161484100");
+            var redirectResult = await redirect.Add("", "9783161484100");
 
             Assert.Equal("/Books/IncrementBook/?isbn=&isbn13=9783161484100", redirectResult.Url);
         }
@@ -80,10 +80,10 @@ namespace OpenSchoolLibrary.Tests.Controllers
             var stubCheck = new StubCheckForExistingISBN();
             await stubCheck.Exists("0198526637", "");
 
-            var books = new BooksController(stubCheck);
+            var redirect = new RedirectAddBookController(stubCheck);
 
             //Act
-            var redirectResult = await books.Add("0198526637", "");
+            var redirectResult = await redirect.Add("0198526637", "");
 
             Assert.Equal("/Books/AddNewBook/?isbn=0198526637&isbn13=", redirectResult.Url);
         }
@@ -95,10 +95,10 @@ namespace OpenSchoolLibrary.Tests.Controllers
             var stubCheck = new StubCheckForExistingISBN();
             await stubCheck.Exists("", "9783161484101");
 
-            var books = new BooksController(stubCheck);
+            var redirect = new RedirectAddBookController(stubCheck);
 
             //Act
-            var redirectResult = await books.Add("", "9783161484101");
+            var redirectResult = await redirect.Add("", "9783161484101");
 
             Assert.Equal("/Books/AddNewBook/?isbn=&isbn13=9783161484101", redirectResult.Url);
         }

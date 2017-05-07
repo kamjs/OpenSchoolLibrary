@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenSchoolLibrary.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,16 @@ namespace OpenSchoolLibrary.Tests.Controllers
 {
     public class BooksControllerTests
     {
+        [Fact]
+        public void AddNewBook_View_Is_Sent_A_Valid_Model()
+        {
+            //Arrange
 
+            //var books = new BooksController();
+
+            //Act
+
+            //Assert
+        }
     }
 }

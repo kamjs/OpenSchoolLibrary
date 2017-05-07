@@ -175,11 +175,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\RedirectAddBookController.cs" />
     <Compile Include="Domain\CheckForExistingIsbnInDb.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Domain\GetGenreList.cs" />
     <Compile Include="Domain\ICheckForExistingISBN .cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Domain\Genre.cs" />
+    <Compile Include="Domain\IGetGenreList.cs" />
     <Compile Include="Domain\Librarian.cs" />
     <Compile Include="Domain\LibraryContext.cs" />
     <Compile Include="Domain\Patron.cs" />
@@ -278,6 +281,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\RedirectAddBook\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

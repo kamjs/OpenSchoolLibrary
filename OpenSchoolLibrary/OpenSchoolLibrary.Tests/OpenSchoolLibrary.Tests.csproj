@@ -99,6 +99,7 @@
     <Compile Include="Controllers\Add_Book_ISBN_LookUp.cs" />
     <Compile Include="Controllers\BooksControllerTests.cs" />
     <Compile Include="Controllers\StubCheckForExistingISBN.cs" />
+    <Compile Include="Controllers\StubGetGenreList.cs" />
     <Compile Include="Validations\ISBNTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
