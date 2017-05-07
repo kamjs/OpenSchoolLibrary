@@ -19,7 +19,7 @@ namespace OpenSchoolLibrary.Domain
 
         public DbSet<Patron> Patrons { get; set; }
         public DbSet<Librarian> Librarians { get; set; }
-        //public DbSet<Book> Books { get; set; }
+        public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Generes { get; set; }
     }
 }

@@ -176,6 +176,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\RedirectAddBookController.cs" />
+    <Compile Include="Domain\Book.cs" />
     <Compile Include="Domain\CheckForExistingIsbnInDb.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Domain\GetGenreList.cs" />
