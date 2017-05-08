@@ -16,7 +16,9 @@ using System.Threading.Tasks;
 namespace OpenSchoolLibrary.Controllers 
 {
     public class BooksController : Controller
-    {        
+    {
+        
+
         public enum BookConditions
         {
             Excellent,
@@ -33,33 +35,5 @@ namespace OpenSchoolLibrary.Controllers
             return View();
         }
 
-        // GET: Books/AddNewBook
-        [HttpGet]
-        public ActionResult AddNewBook(string isbn, string isbn13)
-        {
-            var model = new AddNewBookViewModel()
-            {
-               // GenreList = new SelectList(db.Generes.Select(b => new { b.ID, b.Name }).ToList(), "ID", "Name"),
-                ISBN = isbn,
-                ISBN13 = isbn13
-            };
-
-            return View(model);
-        }
-
-        // POST: Books/AddNewBook
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddNewBook(AddNewBookViewModel book)
-        {
-            if (ModelState.IsValid)
-            {
-                //db.Books.Add(book);
-                //db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View();
-        }
     }
 }

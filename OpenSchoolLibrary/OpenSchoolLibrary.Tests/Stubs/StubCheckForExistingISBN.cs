@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OpenSchoolLibrary.Tests.Controllers
+namespace OpenSchoolLibrary.Tests.Stubs
 {
     public class StubCheckForExistingISBN: ICheckForExistingISBN
     {

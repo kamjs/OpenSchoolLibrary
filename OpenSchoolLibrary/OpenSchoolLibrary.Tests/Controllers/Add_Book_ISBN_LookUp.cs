@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xunit;
 using OpenSchoolLibrary.Controllers;
 using System.Web.Mvc;
+using OpenSchoolLibrary.Tests.Stubs;
 
 namespace OpenSchoolLibrary.Tests.Controllers
 {

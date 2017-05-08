@@ -175,6 +175,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AddNewBookController.cs" />
     <Compile Include="Controllers\RedirectAddBookController.cs" />
     <Compile Include="Domain\Book.cs" />
     <Compile Include="Domain\CheckForExistingIsbnInDb.cs" />
@@ -281,7 +282,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\RedirectAddBook\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

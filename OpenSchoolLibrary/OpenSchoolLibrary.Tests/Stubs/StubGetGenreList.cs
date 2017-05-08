@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using OpenSchoolLibrary.Domain;
 
-namespace OpenSchoolLibrary.Tests.Controllers
+namespace OpenSchoolLibrary.Tests.Stubs
 {
     class StubGetGenreList : IGetGenreList
     {
