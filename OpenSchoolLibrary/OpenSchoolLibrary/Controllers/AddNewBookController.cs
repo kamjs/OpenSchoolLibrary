@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace OpenSchoolLibrary.Controllers
 {
@@ -25,7 +26,7 @@ namespace OpenSchoolLibrary.Controllers
 
             var model = new AddNewBookViewModel()
             {
-                GenreList = await genreList.GenreList(),
+                Genres = await genreList.GenreList().ToListAsync(),
                 ISBN = isbn,
                 ISBN13 = isbn13
             };

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenSchoolLibrary.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,9 +18,8 @@ namespace OpenSchoolLibrary.Models.BooksViewModels
         public string ISBN13 { get; set; }
         public int Condition { get; set; }
         public string CatalogID { get; set; }
-        public int Genre { get; set; }
+        public List<Genre> Genres { get; set; }
 
-        public SelectList GenreList { get; set; }
 
     }
 }

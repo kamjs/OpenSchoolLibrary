@@ -10,7 +10,7 @@ namespace OpenSchoolLibrary.Tests.Stubs
 {
     class StubGetGenreList : IGetGenreList
     {
-        public async Task<SelectList> GenreList()
+        public IQueryable<Genre> GenreList()
         {
             throw new NotImplementedException();
         }

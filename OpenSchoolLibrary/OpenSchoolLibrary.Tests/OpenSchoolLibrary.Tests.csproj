@@ -98,6 +98,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Add_Book_ISBN_LookUp.cs" />
     <Compile Include="Controllers\BooksControllerTests.cs" />
+    <Compile Include="Controllers\GetGenresTest.cs" />
     <Compile Include="Stubs\StubCheckForExistingISBN.cs" />
     <Compile Include="Stubs\StubGetGenreList.cs" />
     <Compile Include="Validations\ISBNTests.cs" />

@@ -9,6 +9,6 @@ namespace OpenSchoolLibrary.Domain
 {
     public interface IGetGenreList
     {
-        Task<SelectList> GenreList();
+        IQueryable<Genre> GenreList();
     }
 }

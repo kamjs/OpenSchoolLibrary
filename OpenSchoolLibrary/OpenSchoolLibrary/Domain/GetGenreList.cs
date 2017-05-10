@@ -17,6 +17,6 @@ namespace OpenSchoolLibrary.Domain
             this.libraryContext = libraryContext;
         }
 
-        public async Task<SelectList> GenreList() => new SelectList(await libraryContext.Generes.Select(b => new { b.ID, b.Name }).ToListAsync(), "ID", "Name");
+        public IQueryable<Genre> GenreList() => libraryContext.Generes;
     }
 }

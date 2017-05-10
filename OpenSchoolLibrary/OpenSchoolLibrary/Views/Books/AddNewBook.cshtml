@@ -58,10 +58,9 @@
                 <label>Genre:</label>
             </div>
             <div class="col-md-10">
-                <select multiple name="Genre" class="form-control">
-                    @foreach (var item in Model.GenreList)
-                    {
-                        <option value="@item.Value">@item.Text</option>
+                <select name="Genres" multiple class="form-control">
+                    @foreach(var g in Model.Genres) {
+                    <option value="@g.ID">@g.Name</option>
                     }
                 </select>
             </div>
