@@ -19,6 +19,7 @@ namespace OpenSchoolLibrary.Models.BooksViewModels
         public int Condition { get; set; }
         public string CatalogID { get; set; }
         public List<Genre> Genres { get; set; }
+        public List<int> GenreIDs { get; set; }
 
 
     }
