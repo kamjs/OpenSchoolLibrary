@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
 using OpenSchoolLibrary.Domain;
 
 namespace OpenSchoolLibrary.Tests.Stubs
 {
-    class StubGetGenreList : IGetGenreList
+    public class StubGetGenreList : IGetGenreList
     {
-        public IQueryable<Genre> GenreList()
-        {
-            throw new NotImplementedException();
-        }
+        public IQueryable<Genre> GenreList() => Genres.AsQueryable();
+
+        private List<Genre> Genres = new List<Genre>{
+            new Genre { ID = 1, Name = "Horror" },
+            new Genre { ID = 564 , Name = "Science Fiction" },
+            new Genre { ID = 84, Name = "Romance" }
+        };
     }
 }
