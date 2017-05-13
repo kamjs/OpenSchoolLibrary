@@ -18,11 +18,19 @@ namespace OpenSchoolLibrary.Domain.Validations
             if (!AuthorIsValid(book))
                 return errorMessage = "Title is missing.";
 
+            if (book.ISBN !="" && !ISBNValidation.ValidateISBN10(book.ISBN))
+                return errorMessage = "ISBN 10 is not valid.";
+
+            if (book.ISBN13 != "" && !ISBNValidation.ValidateISBN13(book.ISBN13))
+                return errorMessage = "ISBN 13 is not valid.";
+
             return errorMessage = String.Empty;
         }
 
         private bool TitleIsValid(AddNewBookPostViewModel book) => book.Title != "";
 
         private bool AuthorIsValid(AddNewBookPostViewModel book) => book.Author != "";
+
+        
     }
 }

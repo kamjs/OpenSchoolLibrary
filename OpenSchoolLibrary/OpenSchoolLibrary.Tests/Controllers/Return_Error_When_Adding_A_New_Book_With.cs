@@ -21,6 +21,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
                 SubTitle = "Subtitle",
                 Author = "Someone",
                 ISBN = "1885167776",
+                ISBN13 = "9781885167774",
                 Condition = "Good",
                 CatalogID = "Something",
                 GenreIDs = new List<int>() {1,2,3 }
@@ -41,6 +42,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
                 SubTitle = "Subtitle",
                 Author = "",
                 ISBN = "1885167776",
+                ISBN13 = "9781885167774",
                 Condition = "Good",
                 CatalogID = "Something",
                 GenreIDs = new List<int>() { 1, 2, 3 }
@@ -55,7 +57,24 @@ namespace OpenSchoolLibrary.Tests.Controllers
         [Fact]
         public void Invalid_ISBN_Or_ISBN13()
         {
+            //Valid ISBN 1885167776
+            //Valid ISBN13 9781885167774
+            var book = new AddNewBookPostViewModel()
+            {
+                Title = "A Title",
+                SubTitle = "Subtitle",
+                Author = "Someone",
+                ISBN = "1885167776",
+                ISBN13 = "9781885167770",
+                Condition = "Good",
+                CatalogID = "Something",
+                GenreIDs = new List<int>() { 1, 2, 3 }
+            };
+            var addNewBook = new AddNewBookController();
 
+            var saveBook = addNewBook.AddNewBook(book) as ViewResult;
+
+            Assert.True(saveBook != null);
         }
 
         [Fact]

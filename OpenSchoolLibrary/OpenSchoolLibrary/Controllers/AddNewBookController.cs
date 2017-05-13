@@ -50,7 +50,6 @@ namespace OpenSchoolLibrary.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddNewBook(AddNewBookPostViewModel book)
         {
-            string errorMessage = String.Empty;
             var bookValidation = new BookValidations();
 
             if(bookValidation.ValidateBook(book).ToString() == "")
