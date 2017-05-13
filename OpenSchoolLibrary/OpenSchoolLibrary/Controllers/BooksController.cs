@@ -17,18 +17,6 @@ namespace OpenSchoolLibrary.Controllers
 {
     public class BooksController : Controller
     {
-        
-
-        public enum BookConditions
-        {
-            Excellent,
-            Good,
-            Fair,
-            Used,
-            Bad
-        }
-
-        // GET: Books/Add
         [HttpGet, Route("books/add")]
         public ViewResult Add()
         {

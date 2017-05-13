@@ -20,13 +20,24 @@ namespace OpenSchoolLibrary.Controllers
 
         public AddNewBookController() : this( new GetGenreList( new LibraryContext() ) ) { }
 
+        public enum BookConditions
+        {
+            Excellent,
+            Good,
+            Fair,
+            Used,
+            Bad
+        }
+
         [HttpGet, Route("books/addnewbook")]
         public async Task<ViewResult> AddNewBook(string isbn, string isbn13)
         {
 
             var model = new AddNewBookViewModel()
             {
+
                 Genres = await genreList.GenreList().ToListAsync(),
+                Conditions = Enum.GetValues(typeof(BookConditions)).OfType<BookConditions>().ToList(),
                 ISBN = isbn,
                 ISBN13 = isbn13
             };

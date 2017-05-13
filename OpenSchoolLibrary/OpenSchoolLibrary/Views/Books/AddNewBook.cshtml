@@ -37,11 +37,25 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Condition", EnumHelper.GetSelectList(typeof(OpenSchoolLibrary.Controllers.BooksController.BookConditions)), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Condition, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                <label>Condition:</label>
+            </div>
+            <div class="col-md-10">
+                <select name="Condition" class="form-control">
+                    @foreach (var c in Model.Conditions)
+                    {
+                        <option value="@c.ToString()">@c.ToString()</option>
+                    }
+                </select>
             </div>
         </div>
 
