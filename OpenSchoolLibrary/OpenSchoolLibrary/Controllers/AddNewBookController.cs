@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using OpenSchoolLibrary.Domain.Validations;
 
 namespace OpenSchoolLibrary.Controllers
 {
@@ -47,16 +48,23 @@ namespace OpenSchoolLibrary.Controllers
 
         [HttpPost, Route("books/addnewbook")]
         [ValidateAntiForgeryToken]
-        public ActionResult AddNewBook(AddNewBookViewModel book)
+        public ActionResult AddNewBook(AddNewBookPostViewModel book)
         {
-            if (ModelState.IsValid)
-            {
-                //db.Books.Add(book);
-                //db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            string errorMessage = String.Empty;
+            var bookValidation = new BookValidations();
 
-            return View();
+            if(bookValidation.ValidateBook(book).ToString() == "")
+            {
+                /* TODO: Create a method to find out the book's
+                 * ID so we can redirect the user to that page.
+                 */
+                return Redirect($"~/Views/Books/Details.cshtml");
+            }
+            else
+            {
+                //TODO: Add in error message and book...somehow.
+                return View("~/Views/Books/AddNewBook.cshtml");
+            }
         }
     }
 }

@@ -98,6 +98,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Add_Book_ISBN_LookUp.cs" />
     <Compile Include="Controllers\BooksControllerTests.cs" />
+    <Compile Include="Controllers\Return_Error_When_Adding_A_New_Book_With.cs" />
     <Compile Include="Stubs\StubCheckForExistingISBN.cs" />
     <Compile Include="Validations\ISBNTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
