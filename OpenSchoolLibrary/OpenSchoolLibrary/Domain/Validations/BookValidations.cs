@@ -15,9 +15,14 @@ namespace OpenSchoolLibrary.Domain.Validations
             if (!TitleIsValid(book))
                 return errorMessage = "Title is missing.";
 
+            if (!AuthorIsValid(book))
+                return errorMessage = "Title is missing.";
+
             return errorMessage = String.Empty;
         }
 
         private bool TitleIsValid(AddNewBookPostViewModel book) => book.Title != "";
+
+        private bool AuthorIsValid(AddNewBookPostViewModel book) => book.Author != "";
     }
 }

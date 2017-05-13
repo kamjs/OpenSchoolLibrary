@@ -30,13 +30,26 @@ namespace OpenSchoolLibrary.Tests.Controllers
             var saveBook = addNewBook.AddNewBook(book) as ViewResult;
 
             Assert.True(saveBook != null);
-
         }
 
         [Fact]
         public void Missing_An_Author()
         {
+            var book = new AddNewBookPostViewModel()
+            {
+                Title = "A Title",
+                SubTitle = "Subtitle",
+                Author = "",
+                ISBN = "1885167776",
+                Condition = "Good",
+                CatalogID = "Something",
+                GenreIDs = new List<int>() { 1, 2, 3 }
+            };
+            var addNewBook = new AddNewBookController();
 
+            var saveBook = addNewBook.AddNewBook(book) as ViewResult;
+
+            Assert.True(saveBook != null);
         }
 
         [Fact]
