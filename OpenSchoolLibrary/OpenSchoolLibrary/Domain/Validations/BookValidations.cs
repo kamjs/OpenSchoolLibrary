@@ -9,8 +9,16 @@ namespace OpenSchoolLibrary.Domain.Validations
     public class BookValidations
     {
         private string errorMessage;
+        readonly CheckForExistingIsbnInDb checkForISBN;
 
-        public string ValidateBook(AddNewBookPostViewModel book)
+        public BookValidations(LibraryContext context)
+        {
+            this.checkForISBN = new CheckForExistingIsbnInDb(context);
+        }
+
+        public BookValidations() : this( new LibraryContext() ) { }
+
+        public async System.Threading.Tasks.Task<string> ValidateBook(AddNewBookPostViewModel book)
         {
             if (!TitleIsValid(book))
                 return errorMessage = "Title is missing.";
@@ -18,13 +26,16 @@ namespace OpenSchoolLibrary.Domain.Validations
             if (!AuthorIsValid(book))
                 return errorMessage = "Title is missing.";
 
-            if (book.ISBN !="" && !ISBNValidation.ValidateISBN10(book.ISBN))
+            if (await checkForISBN.Exists(book.ISBN, book.ISBN13))
+                return errorMessage = "ISBN already exists.";
+
+            if (book.ISBN != "" && !ISBNValidation.ValidateISBN10(book.ISBN))
                 return errorMessage = "ISBN 10 is not valid.";
 
             if (book.ISBN13 != "" && !ISBNValidation.ValidateISBN13(book.ISBN13))
                 return errorMessage = "ISBN 13 is not valid.";
 
-            return errorMessage = String.Empty;
+            return errorMessage;
         }
 
         private bool TitleIsValid(AddNewBookPostViewModel book) => book.Title != "";

@@ -33,7 +33,7 @@ namespace OpenSchoolLibrary.Migrations
             context.SaveChanges();
 
             context.Books.AddOrUpdate(
-                new Book { ISBN= "0198526636", ISBN13= "9783161484100" }
+                new Book { ISBN= "0671027034", ISBN13= "9780671027032" }
                 );
 
 
