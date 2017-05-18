@@ -122,38 +122,20 @@ namespace OpenSchoolLibrary.Tests.Controllers
                 Title = "A Title",
                 SubTitle = "Subtitle",
                 Author = "Someone",
-                ISBN = "0671027034",
-                ISBN13 = "9780671027032",
-                Condition = "Good",
-                CatalogID = "Something",
-                GenreIDs = new List<int>() { 1, 2, 3 }
-            };
-            var addNewBook = new AddNewBookController();
-
-            var saveBook = await addNewBook.AddNewBook(book) as ViewResult;
-
-            Assert.True(saveBook != null);
-        }
-
-        [Fact]
-        public async Task An_ISBN13_That_Already_Exists_In_The_System()
-        {
-            var book = new AddNewBookPostViewModel()
-            {
-                Title = "A Title",
-                SubTitle = "Subtitle",
-                Author = "Someone",
-                ISBN = "1885167776",
+                ISBN = "0198526636",
                 ISBN13 = "9783161484100",
                 Condition = "Good",
                 CatalogID = "Something",
                 GenreIDs = new List<int>() { 1, 2, 3 }
             };
-            var addNewBook = new AddNewBookController();
 
-            var saveBook = await addNewBook.AddNewBook(book) as ViewResult;
+            ViewResult saveBook = await AddNewBook(book);
 
-            Assert.True(saveBook != null);
+            AssertIsViewResult(saveBook);
+
+            var model = GetErrorsList(saveBook);
+
+            Assert.True(model.Contains("ISBN already exists."));
         }
 
         private async Task<ViewResult> AddNewBook(AddNewBookPostViewModel book)
