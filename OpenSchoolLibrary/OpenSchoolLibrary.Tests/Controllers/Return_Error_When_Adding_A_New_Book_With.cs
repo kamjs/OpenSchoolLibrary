@@ -13,10 +13,8 @@ namespace OpenSchoolLibrary.Tests.Controllers
 {
     public class Return_Error_When_Adding_A_New_Book_With
     {
-        //Valid ISBN 1885167776
-        //Valid ISBN13 9781885167774
-
         private AddNewBookController addNewBookController = new AddNewBookController(new StubGenreList(), new Domain.Validations.BookValidations(new StubCheckForExistingISBN()));
+        private string isbnThatExistsAlready = "0198526636";
 
         [Fact]
         public async Task Missing_A_Title()
@@ -117,12 +115,15 @@ namespace OpenSchoolLibrary.Tests.Controllers
         [Fact]
         public async Task An_ISBN_That_Already_Exists_In_The_System()
         {
+            var stubIsbns = new StubCheckForExistingISBN();
+            stubIsbns.ExistingIsbns.Add(isbnThatExistsAlready);
+
             var book = new PostAddNewBookViewModel()
             {
                 Title = "A Title",
                 SubTitle = "Subtitle",
                 Author = "Someone",
-                ISBN = "0198526636",
+                ISBN = isbnThatExistsAlready,
                 ISBN13 = "9783161484100",
                 Condition = "Good",
                 CatalogID = "Something",
