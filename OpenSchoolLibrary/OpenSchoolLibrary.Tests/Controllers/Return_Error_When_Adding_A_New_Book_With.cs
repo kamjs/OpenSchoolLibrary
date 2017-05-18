@@ -39,8 +39,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
 
             var model = GetErrorsList(saveBook);
 
-            Assert.Equal("Title is missing.", model.First());
-
+            Assert.True(model.Contains("Title is missing."));
         }
 
         [Fact]
