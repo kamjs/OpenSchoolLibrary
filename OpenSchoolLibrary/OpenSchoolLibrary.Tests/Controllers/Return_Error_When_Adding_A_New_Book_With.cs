@@ -7,6 +7,7 @@ using Xunit;
 using OpenSchoolLibrary.Controllers;
 using OpenSchoolLibrary.Models.BooksViewModels;
 using System.Web.Mvc;
+using OpenSchoolLibrary.Tests.Stubs;
 
 namespace OpenSchoolLibrary.Tests.Controllers
 {
@@ -15,11 +16,13 @@ namespace OpenSchoolLibrary.Tests.Controllers
         //Valid ISBN 1885167776
         //Valid ISBN13 9781885167774
 
+        private AddNewBookController addNewBookController = new AddNewBookController(new StubGenreList(), new Domain.Validations.BookValidations(new StubCheckForExistingISBN()));
+
         [Fact]
-        public void Missing_A_Title()
+        public async Task Missing_A_Title()
         {
             var book = new AddNewBookPostViewModel()
-            { 
+            {
                 Title = "",
                 SubTitle = "Subtitle",
                 Author = "Someone",
@@ -27,17 +30,21 @@ namespace OpenSchoolLibrary.Tests.Controllers
                 ISBN13 = "9781885167774",
                 Condition = "Good",
                 CatalogID = "Something",
-                GenreIDs = new List<int>() {1,2,3 }
+                GenreIDs = new List<int>() { 1, 2, 3 }
             };
-            var addNewBook = new AddNewBookController();
 
-            var saveBook = addNewBook.AddNewBook(book) as ViewResult;
+            ViewResult saveBook = await AddNewBook(book);
 
-            Assert.True(saveBook != null);
+            AssertIsViewResult(saveBook);
+
+            var model = GetErrorsList(saveBook);
+
+            Assert.Equal("Title is missing.", model.First());
+
         }
 
         [Fact]
-        public void Missing_An_Author()
+        public async Task Missing_An_Author()
         {
             var book = new AddNewBookPostViewModel()
             {
@@ -50,15 +57,17 @@ namespace OpenSchoolLibrary.Tests.Controllers
                 CatalogID = "Something",
                 GenreIDs = new List<int>() { 1, 2, 3 }
             };
-            var addNewBook = new AddNewBookController();
 
-            var saveBook = addNewBook.AddNewBook(book) as ViewResult;
+            ViewResult saveBook = await AddNewBook(book);
 
-            Assert.True(saveBook != null);
+            AssertIsViewResult(saveBook);
+            var model = GetErrorsList(saveBook);
+
+            Assert.Equal("Author is missing.", model.First());
         }
 
         [Fact]
-        public void Invalid_ISBN_Or_ISBN13()
+        public async Task Invalid_ISBN_Or_ISBN13()
         {
             var book = new AddNewBookPostViewModel()
             {
@@ -73,13 +82,13 @@ namespace OpenSchoolLibrary.Tests.Controllers
             };
             var addNewBook = new AddNewBookController();
 
-            var saveBook = addNewBook.AddNewBook(book) as ViewResult;
+            var saveBook = await addNewBook.AddNewBook(book) as ViewResult;
 
             Assert.True(saveBook != null);
         }
 
         [Fact]
-        public void An_ISBN_That_Already_Exists_In_The_System()
+        public async Task An_ISBN_That_Already_Exists_In_The_System()
         {
             var book = new AddNewBookPostViewModel()
             {
@@ -94,13 +103,13 @@ namespace OpenSchoolLibrary.Tests.Controllers
             };
             var addNewBook = new AddNewBookController();
 
-            var saveBook = addNewBook.AddNewBook(book) as ViewResult;
+            var saveBook = await addNewBook.AddNewBook(book) as ViewResult;
 
             Assert.True(saveBook != null);
         }
 
         [Fact]
-        public void An_ISBN13_That_Already_Exists_In_The_System()
+        public async Task An_ISBN13_That_Already_Exists_In_The_System()
         {
             var book = new AddNewBookPostViewModel()
             {
@@ -115,9 +124,25 @@ namespace OpenSchoolLibrary.Tests.Controllers
             };
             var addNewBook = new AddNewBookController();
 
-            var saveBook = addNewBook.AddNewBook(book) as ViewResult;
+            var saveBook = await addNewBook.AddNewBook(book) as ViewResult;
 
             Assert.True(saveBook != null);
+        }
+
+        private async Task<ViewResult> AddNewBook(AddNewBookPostViewModel book)
+        {
+            return await addNewBookController.AddNewBook(book) as ViewResult;
+        }
+
+        private static void AssertIsViewResult(ViewResult saveBook)
+        {
+            Assert.True(saveBook != null);
+        }
+
+        private static IEnumerable<string> GetErrorsList(ViewResult saveBook)
+        {
+            var model = saveBook.Model as AddNewBookViewModel;
+            return model.Errors;
         }
     }
 }

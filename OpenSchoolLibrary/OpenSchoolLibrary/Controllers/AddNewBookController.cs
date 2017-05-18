@@ -14,12 +14,18 @@ namespace OpenSchoolLibrary.Controllers
     public class AddNewBookController: Controller
     {
         readonly IGetGenreList genreList;
-        public AddNewBookController(IGetGenreList genreList)
+        readonly BookValidations validateBook;
+
+        public AddNewBookController(IGetGenreList genreList, BookValidations validateBook)
         {
             this.genreList = genreList;
+            this.validateBook = validateBook;
         }
 
-        public AddNewBookController() : this( new GetGenreList( new LibraryContext() ) ) { }
+        public AddNewBookController() : this( 
+            new GetGenreList( new LibraryContext() ),
+            new BookValidations( new CheckForExistingIsbnInDb(new LibraryContext()) )
+            ) { }
 
         public enum BookConditions
         {
@@ -48,22 +54,15 @@ namespace OpenSchoolLibrary.Controllers
 
         [HttpPost, Route("books/addnewbook")]
         [ValidateAntiForgeryToken]
-        public ActionResult AddNewBook(AddNewBookPostViewModel book)
+        public async Task<ActionResult> AddNewBook(AddNewBookPostViewModel book)
         {
-            var bookValidation = new BookValidations();
+            var model = new AddNewBookViewModel();
 
-            if(bookValidation.ValidateBook(book).ToString() == "")
-            {
-                /* TODO: Create a method to find out the book's
-                 * ID so we can redirect the user to that page.
-                 */
-                return Redirect($"~/Views/Books/Details.cshtml");
-            }
-            else
-            {
-                //TODO: Add in error message and book...somehow.
-                return View("~/Views/Books/AddNewBook.cshtml");
-            }
+            model.Errors = await validateBook.ValidateBook(book);
+
+
+            return View(model);
+
         }
     }
 }

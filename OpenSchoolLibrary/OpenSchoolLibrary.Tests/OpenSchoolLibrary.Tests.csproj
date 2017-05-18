@@ -100,6 +100,7 @@
     <Compile Include="Controllers\BooksControllerTests.cs" />
     <Compile Include="Controllers\Return_Error_When_Adding_A_New_Book_With.cs" />
     <Compile Include="Stubs\StubCheckForExistingISBN.cs" />
+    <Compile Include="Stubs\StubGenreList.cs" />
     <Compile Include="Validations\ISBNTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />

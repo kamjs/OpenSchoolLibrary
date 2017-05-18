@@ -10,6 +10,15 @@
 <form class="add-book" action="/books/addnewbook" method="post">
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
+        @if (Model.Errors.Any())
+        {
+            <ul class="has-error">
+                @foreach(var e in Model.Errors)
+                {
+                    <li>@e</li>
+                }
+            </ul>
+        }
         <div class="form-group">
             <div class="control-label col-md-2">
                 <label>Title:</label>
@@ -36,15 +45,6 @@
                 <input type="text" name="Author" class="form-control" required placeholder="Author is Required.">
             </div>
         </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Condition", EnumHelper.GetSelectList(typeof(OpenSchoolLibrary.Controllers.BooksController.BookConditions)), new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Condition, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
         <div class="form-group">
             <div class="control-label col-md-2">
                 <label>Condition:</label>
