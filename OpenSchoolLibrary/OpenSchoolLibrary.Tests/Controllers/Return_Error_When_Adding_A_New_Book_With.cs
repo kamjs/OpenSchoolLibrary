@@ -67,7 +67,31 @@ namespace OpenSchoolLibrary.Tests.Controllers
         }
 
         [Fact]
-        public async Task Invalid_ISBN_Or_ISBN13()
+        public async Task Invalid_ISBN()
+        {
+            var book = new AddNewBookPostViewModel()
+            {
+                Title = "A Title",
+                SubTitle = "Subtitle",
+                Author = "Someone",
+                ISBN = "0671020034",
+                ISBN13 = "9780671027032",
+                Condition = "Good",
+                CatalogID = "Something",
+                GenreIDs = new List<int>() { 1, 2, 3 }
+            };
+
+            ViewResult saveBook = await AddNewBook(book);
+
+            AssertIsViewResult(saveBook);
+
+            var model = GetErrorsList(saveBook);
+
+            Assert.True(model.Contains("ISBN 10 is not valid."));
+        }
+
+        [Fact]
+        public async Task Invalid_ISBN13()
         {
             var book = new AddNewBookPostViewModel()
             {
@@ -80,11 +104,14 @@ namespace OpenSchoolLibrary.Tests.Controllers
                 CatalogID = "Something",
                 GenreIDs = new List<int>() { 1, 2, 3 }
             };
-            var addNewBook = new AddNewBookController();
 
-            var saveBook = await addNewBook.AddNewBook(book) as ViewResult;
+            ViewResult saveBook = await AddNewBook(book);
 
-            Assert.True(saveBook != null);
+            AssertIsViewResult(saveBook);
+
+            var model = GetErrorsList(saveBook);
+
+            Assert.True(model.Contains("ISBN 10 is not valid."));
         }
 
         [Fact]
