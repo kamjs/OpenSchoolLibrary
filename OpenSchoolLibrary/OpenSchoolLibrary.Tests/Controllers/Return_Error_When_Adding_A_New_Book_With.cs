@@ -99,7 +99,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
                 SubTitle = "Subtitle",
                 Author = "Someone",
                 ISBN = "0671027034",
-                ISBN13 = "9780671027032",
+                ISBN13 = "9780071027032",
                 Condition = "Good",
                 CatalogID = "Something",
                 GenreIDs = new List<int>() { 1, 2, 3 }
@@ -111,7 +111,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
 
             var model = GetErrorsList(saveBook);
 
-            Assert.True(model.Contains("ISBN 10 is not valid."));
+            Assert.True(model.Contains("ISBN 13 is not valid."));
         }
 
         [Fact]
