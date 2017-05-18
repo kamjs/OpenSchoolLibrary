@@ -60,7 +60,6 @@ namespace OpenSchoolLibrary.Controllers
 
             model.Errors = await validateBook.ValidateBook(book);
 
-
             return View(model);
 
         }

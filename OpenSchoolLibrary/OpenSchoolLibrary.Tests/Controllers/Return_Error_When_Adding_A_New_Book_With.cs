@@ -60,9 +60,10 @@ namespace OpenSchoolLibrary.Tests.Controllers
             ViewResult saveBook = await AddNewBook(book);
 
             AssertIsViewResult(saveBook);
+
             var model = GetErrorsList(saveBook);
 
-            Assert.Equal("Author is missing.", model.First());
+            Assert.True(model.Contains("Author is missing."));
         }
 
         [Fact]

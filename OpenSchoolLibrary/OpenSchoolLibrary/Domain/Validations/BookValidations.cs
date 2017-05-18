@@ -19,11 +19,11 @@ namespace OpenSchoolLibrary.Domain.Validations
         {
             var errors = new List<string>();
 
-            if (!TitleIsValid(book))
-                errors.Add("Title is missing.");
+            if (TitleIsInvalid(book))
+            errors.Add("Title is missing.");
 
-            if (!AuthorIsValid(book))
-                errors.Add("Title is missing.");
+            if (AuthorIsInvalid(book))
+                errors.Add("Author is missing.");
 
             if (await checkForISBN.Exists(book.ISBN, book.ISBN13))
                 errors.Add("ISBN already exists.");
@@ -37,9 +37,9 @@ namespace OpenSchoolLibrary.Domain.Validations
             return errors;
         }
 
-        private bool TitleIsValid(AddNewBookPostViewModel book) => String.IsNullOrWhiteSpace(book.Title);
+        private bool TitleIsInvalid(AddNewBookPostViewModel book) => String.IsNullOrWhiteSpace(book.Title);
 
-        private bool AuthorIsValid(AddNewBookPostViewModel book) => String.IsNullOrWhiteSpace(book.Author);
+        private bool AuthorIsInvalid(AddNewBookPostViewModel book) => String.IsNullOrWhiteSpace(book.Author);
 
 
     }
