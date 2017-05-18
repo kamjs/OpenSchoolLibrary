@@ -2,7 +2,7 @@
 
 namespace OpenSchoolLibrary.Models.BooksViewModels
 {
-    public class AddNewBookPostViewModel
+    public class PostAddNewBookViewModel
     {
         public int ID { get; set; }
         public string Title { get; set; }

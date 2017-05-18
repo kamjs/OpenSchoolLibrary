@@ -54,7 +54,7 @@ namespace OpenSchoolLibrary.Controllers
 
         [HttpPost, Route("books/addnewbook")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddNewBook(AddNewBookPostViewModel book)
+        public async Task<ActionResult> AddNewBook(PostAddNewBookViewModel book)
         {
             var model = new AddNewBookViewModel();
 

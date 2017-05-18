@@ -21,7 +21,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
         [Fact]
         public async Task Missing_A_Title()
         {
-            var book = new AddNewBookPostViewModel()
+            var book = new PostAddNewBookViewModel()
             {
                 Title = "",
                 SubTitle = "Subtitle",
@@ -45,7 +45,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
         [Fact]
         public async Task Missing_An_Author()
         {
-            var book = new AddNewBookPostViewModel()
+            var book = new PostAddNewBookViewModel()
             {
                 Title = "A Title",
                 SubTitle = "Subtitle",
@@ -69,7 +69,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
         [Fact]
         public async Task Invalid_ISBN()
         {
-            var book = new AddNewBookPostViewModel()
+            var book = new PostAddNewBookViewModel()
             {
                 Title = "A Title",
                 SubTitle = "Subtitle",
@@ -93,7 +93,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
         [Fact]
         public async Task Invalid_ISBN13()
         {
-            var book = new AddNewBookPostViewModel()
+            var book = new PostAddNewBookViewModel()
             {
                 Title = "A Title",
                 SubTitle = "Subtitle",
@@ -117,7 +117,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
         [Fact]
         public async Task An_ISBN_That_Already_Exists_In_The_System()
         {
-            var book = new AddNewBookPostViewModel()
+            var book = new PostAddNewBookViewModel()
             {
                 Title = "A Title",
                 SubTitle = "Subtitle",
@@ -138,7 +138,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
             Assert.True(model.Contains("ISBN already exists."));
         }
 
-        private async Task<ViewResult> AddNewBook(AddNewBookPostViewModel book)
+        private async Task<ViewResult> AddNewBook(PostAddNewBookViewModel book)
         {
             return await addNewBookController.AddNewBook(book) as ViewResult;
         }
