@@ -45,6 +45,14 @@ namespace OpenSchoolLibrary.Tests.Controllers
 
         }
 
+        [Fact]
+        public async Task redirect_to_book_details_after_saving()
+        {
+            RedirectResult saveBook = await AddNewBook(book);
+
+            Assert.Equal("/book/details/1", saveBook.Url);
+        }
+        
         private async Task<RedirectResult> AddNewBook(BookCreationCommand book)
         {
             return await addNewBookController.AddNewBook(book) as RedirectResult;
