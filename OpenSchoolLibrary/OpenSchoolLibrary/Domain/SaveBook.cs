@@ -21,8 +21,14 @@ namespace OpenSchoolLibrary.Domain
         {
             Book book = new Book()
             {
+                Title = cmd.Title,
+                Subtitle = cmd.SubTitle,
+                Author = cmd.Author,
                 ISBN = cmd.ISBN,
-                ISBN13 = cmd.ISBN13
+                ISBN13 = cmd.ISBN13,
+                CatalogID = cmd.CatalogID,
+                Condition = cmd.Condition,
+                GenreIDs = cmd.GenreIDs
             };
             
             db.Books.Add(book);
