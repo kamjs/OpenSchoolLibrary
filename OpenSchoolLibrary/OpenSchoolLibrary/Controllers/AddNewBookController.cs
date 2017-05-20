@@ -1,13 +1,11 @@
 ﻿using OpenSchoolLibrary.Domain;
+using OpenSchoolLibrary.Domain.Validations;
 using OpenSchoolLibrary.Models.BooksViewModels;
 using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using System.Data.Entity;
-using OpenSchoolLibrary.Domain.Validations;
 
 namespace OpenSchoolLibrary.Controllers
 {
@@ -42,10 +40,8 @@ namespace OpenSchoolLibrary.Controllers
         [HttpGet, Route("books/addnewbook")]
         public async Task<ViewResult> AddNewBook(string isbn, string isbn13)
         {
-
             var model = new AddNewBookViewModel()
             {
-
                 Genres = await genreList.GenreList().ToListAsync(),
                 Conditions = Enum.GetValues(typeof(BookConditions)).OfType<BookConditions>().ToList(),
                 ISBN = isbn,
@@ -78,8 +74,6 @@ namespace OpenSchoolLibrary.Controllers
 
                 return Redirect($"/book/details/{bookId}");
             }
-            
-
         }
     }
 }
