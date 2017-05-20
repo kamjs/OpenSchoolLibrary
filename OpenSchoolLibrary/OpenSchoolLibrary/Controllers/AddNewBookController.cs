@@ -59,13 +59,18 @@ namespace OpenSchoolLibrary.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddNewBook(BookCreationCommand book)
         {
-            var model = new AddNewBookViewModel();
-
-            model.Errors = await validateBook.ValidateBook(book);
-
-            if(model.Errors.Any())
+            var model = new AddNewBookViewModel()
             {
-                return View(model);
+                Errors = await validateBook.ValidateBook(book),
+                Genres = await genreList.GenreList().ToListAsync(),
+                Conditions = Enum.GetValues(typeof(BookConditions)).OfType<BookConditions>().ToList(),
+                ISBN = book.ISBN,
+                ISBN13 = book.ISBN13
+            };                
+
+            if (model.Errors.Any())
+            {
+                return View("~/Views/Books/AddNewBook.cshtml", model);
             }
             else
             {

@@ -12,7 +12,7 @@
     <div class="form-horizontal">
         @if (Model.Errors.Any())
         {
-            <ul class="has-error">
+            <ul class="text-danger">
                 @foreach(var e in Model.Errors)
                 {
                     <li>@e</li>
