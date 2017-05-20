@@ -28,10 +28,10 @@ namespace OpenSchoolLibrary.Domain.Validations
             if (await checkForISBN.Exists(book.ISBN, book.ISBN13))
                 errors.Add("ISBN already exists.");
 
-            if (!ISBNValidation.ValidateISBN10(book.ISBN))
+            if (book.ISBN != null && !ISBNValidation.ValidateISBN10(book.ISBN))
                 errors.Add("ISBN 10 is not valid.");
 
-            if (!ISBNValidation.ValidateISBN13(book.ISBN13))
+            if (book.ISBN13 != null && !ISBNValidation.ValidateISBN13(book.ISBN13))
                 errors.Add("ISBN 13 is not valid.");
 
             return errors;
