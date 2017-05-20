@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace OpenSchoolLibrary.Domain.Validations
 {
@@ -33,11 +31,9 @@ namespace OpenSchoolLibrary.Domain.Validations
                     return true;
             }
 
-
             if (sequence[9] == checkdigit)
                 return true;
             
-
             return false;
         }
 
@@ -65,7 +61,6 @@ namespace OpenSchoolLibrary.Domain.Validations
 
             if (sequence[12] == checkdigit)
                 return true;
-
 
             return false;
         }
