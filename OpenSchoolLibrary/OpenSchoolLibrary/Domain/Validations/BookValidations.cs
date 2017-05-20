@@ -1,8 +1,6 @@
 ﻿using OpenSchoolLibrary.Models.BooksViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace OpenSchoolLibrary.Domain.Validations
 {
@@ -40,7 +38,5 @@ namespace OpenSchoolLibrary.Domain.Validations
         private bool TitleIsInvalid(BookCreationCommand book) => String.IsNullOrWhiteSpace(book.Title);
 
         private bool AuthorIsInvalid(BookCreationCommand book) => String.IsNullOrWhiteSpace(book.Author);
-
-
     }
 }
