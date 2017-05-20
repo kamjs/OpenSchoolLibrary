@@ -15,7 +15,7 @@ namespace OpenSchoolLibrary.Domain.Validations
             this.checkForISBN = checkforISBN;
         }
 
-        public async System.Threading.Tasks.Task<IEnumerable<string>> ValidateBook(PostAddNewBookViewModel book)
+        public async System.Threading.Tasks.Task<IEnumerable<string>> ValidateBook(BookCreationCommand book)
         {
             var errors = new List<string>();
 
@@ -37,9 +37,9 @@ namespace OpenSchoolLibrary.Domain.Validations
             return errors;
         }
 
-        private bool TitleIsInvalid(PostAddNewBookViewModel book) => String.IsNullOrWhiteSpace(book.Title);
+        private bool TitleIsInvalid(BookCreationCommand book) => String.IsNullOrWhiteSpace(book.Title);
 
-        private bool AuthorIsInvalid(PostAddNewBookViewModel book) => String.IsNullOrWhiteSpace(book.Author);
+        private bool AuthorIsInvalid(BookCreationCommand book) => String.IsNullOrWhiteSpace(book.Author);
 
 
     }

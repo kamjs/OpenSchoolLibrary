@@ -2,9 +2,8 @@
 
 namespace OpenSchoolLibrary.Models.BooksViewModels
 {
-    public class PostAddNewBookViewModel
+    public class BookCreationCommand
     {
-        public int ID { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }
         public string Author { get; set; }

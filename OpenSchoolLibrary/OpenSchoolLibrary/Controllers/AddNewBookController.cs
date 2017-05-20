@@ -14,17 +14,20 @@ namespace OpenSchoolLibrary.Controllers
     public class AddNewBookController: Controller
     {
         readonly IGetGenreList genreList;
+        readonly ISaveBook saveBook;
         readonly BookValidations validateBook;
 
-        public AddNewBookController(IGetGenreList genreList, BookValidations validateBook)
+        public AddNewBookController(IGetGenreList genreList, BookValidations validateBook, ISaveBook saveBook)
         {
             this.genreList = genreList;
             this.validateBook = validateBook;
+            this.saveBook = saveBook;
         }
 
         public AddNewBookController() : this( 
             new GetGenreList( new LibraryContext() ),
-            new BookValidations( new CheckForExistingIsbnInDb(new LibraryContext()) )
+            new BookValidations( new CheckForExistingIsbnInDb(new LibraryContext())),
+            new SaveBook( new LibraryContext() )
             ) { }
 
         public enum BookConditions
@@ -54,13 +57,23 @@ namespace OpenSchoolLibrary.Controllers
 
         [HttpPost, Route("books/addnewbook")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddNewBook(PostAddNewBookViewModel book)
+        public async Task<ActionResult> AddNewBook(BookCreationCommand book)
         {
             var model = new AddNewBookViewModel();
 
             model.Errors = await validateBook.ValidateBook(book);
 
-            return View(model);
+            if(model.Errors.Any())
+            {
+                return View(model);
+            }
+            else
+            {
+                var bookId = await saveBook.Create(book);
+
+                return Redirect($"/book/details/{bookId}");
+            }
+            
 
         }
     }

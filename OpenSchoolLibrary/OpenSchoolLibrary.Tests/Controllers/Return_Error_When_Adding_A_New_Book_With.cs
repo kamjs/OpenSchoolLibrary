@@ -13,13 +13,13 @@ namespace OpenSchoolLibrary.Tests.Controllers
 {
     public class Return_Error_When_Adding_A_New_Book_With
     {
-        private AddNewBookController addNewBookController = new AddNewBookController(new StubGenreList(), new Domain.Validations.BookValidations(new StubCheckForExistingISBN()));
+        private AddNewBookController addNewBookController = new AddNewBookController(new StubGenreList(), new Domain.Validations.BookValidations(new StubCheckForExistingISBN()), new StubBookSaver());
         private string isbnThatExistsAlready = "0198526636";
 
         [Fact]
         public async Task Missing_A_Title()
         {
-            var book = new PostAddNewBookViewModel()
+            var book = new BookCreationCommand()
             {
                 Title = "",
                 SubTitle = "Subtitle",
@@ -43,7 +43,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
         [Fact]
         public async Task Missing_An_Author()
         {
-            var book = new PostAddNewBookViewModel()
+            var book = new BookCreationCommand()
             {
                 Title = "A Title",
                 SubTitle = "Subtitle",
@@ -67,7 +67,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
         [Fact]
         public async Task Invalid_ISBN()
         {
-            var book = new PostAddNewBookViewModel()
+            var book = new BookCreationCommand()
             {
                 Title = "A Title",
                 SubTitle = "Subtitle",
@@ -91,7 +91,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
         [Fact]
         public async Task Invalid_ISBN13()
         {
-            var book = new PostAddNewBookViewModel()
+            var book = new BookCreationCommand()
             {
                 Title = "A Title",
                 SubTitle = "Subtitle",
@@ -118,7 +118,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
             var stubIsbns = new StubCheckForExistingISBN();
             stubIsbns.ExistingIsbns.Add(isbnThatExistsAlready);
 
-            var book = new PostAddNewBookViewModel()
+            var book = new BookCreationCommand()
             {
                 Title = "A Title",
                 SubTitle = "Subtitle",
@@ -139,7 +139,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
             Assert.True(model.Contains("ISBN already exists."));
         }
 
-        private async Task<ViewResult> AddNewBook(PostAddNewBookViewModel book)
+        private async Task<ViewResult> AddNewBook(BookCreationCommand book)
         {
             return await addNewBookController.AddNewBook(book) as ViewResult;
         }
