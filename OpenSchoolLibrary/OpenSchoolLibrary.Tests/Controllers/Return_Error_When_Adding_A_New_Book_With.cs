@@ -13,8 +13,15 @@ namespace OpenSchoolLibrary.Tests.Controllers
 {
     public class Return_Error_When_Adding_A_New_Book_With
     {
-        private AddNewBookController addNewBookController = new AddNewBookController(new StubGenreList(), new Domain.Validations.BookValidations(new StubCheckForExistingISBN()), new StubBookSaver());
+        private AddNewBookController addNewBookController;
+        private StubCheckForExistingISBN stubIsbns;
         private string isbnThatExistsAlready = "0198526636";
+
+        public Return_Error_When_Adding_A_New_Book_With()
+        {
+            stubIsbns = new StubCheckForExistingISBN();
+            addNewBookController = new AddNewBookController(new StubGenreList(), new Domain.Validations.BookValidations(stubIsbns), new StubBookSaver());
+        }
 
         [Fact]
         public async Task Missing_A_Title()
@@ -115,7 +122,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
         [Fact]
         public async Task An_ISBN_That_Already_Exists_In_The_System()
         {
-            var stubIsbns = new StubCheckForExistingISBN();
+            
             stubIsbns.ExistingIsbns.Add(isbnThatExistsAlready);
 
             var book = new BookCreationCommand()
@@ -124,7 +131,7 @@ namespace OpenSchoolLibrary.Tests.Controllers
                 SubTitle = "Subtitle",
                 Author = "Someone",
                 ISBN = isbnThatExistsAlready,
-                ISBN13 = "9783161484100",
+                ISBN13 = "",
                 Condition = "Good",
                 CatalogID = "Something",
                 GenreIDs = new List<int>() { 1, 2, 3 }

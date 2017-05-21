@@ -55,14 +55,9 @@ namespace OpenSchoolLibrary.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddNewBook(BookCreationCommand book)
         {
-            var model = new AddNewBookViewModel()
-            {
-                Errors = await validateBook.ValidateBook(book),
-                Genres = await genreList.GenreList().ToListAsync(),
-                Conditions = Enum.GetValues(typeof(BookConditions)).OfType<BookConditions>().ToList(),
-                ISBN = book.ISBN,
-                ISBN13 = book.ISBN13
-            };                
+            var model = new AddNewBookViewModel();
+
+            model.Errors = await validateBook.ValidateBook(book);
 
             if (model.Errors.Any())
             {
@@ -70,6 +65,11 @@ namespace OpenSchoolLibrary.Controllers
             }
             else
             {
+                model.Genres = await genreList.GenreList().ToListAsync();
+                model.Conditions = Enum.GetValues(typeof(BookConditions)).OfType<BookConditions>().ToList();
+                model.ISBN = book.ISBN;
+                model.ISBN13 = book.ISBN13;
+
                 var bookId = await saveBook.Create(book);
 
                 return Redirect($"/book/details/{bookId}");
