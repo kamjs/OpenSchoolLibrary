@@ -13,7 +13,11 @@ namespace OpenSchoolLibrary.Tests.Stubs
 
         public IQueryable<Genre> GenreList()
         {
-            return StubGenres.AsQueryable();
+            return StubGenres.ToStubQueryable();
+            /* ToStubQueryable is an Extention Method made to get around
+            how IQuerayble and ToListAsync interact with Entity Framework.
+            https://stackoverflow.com/questions/27483709/testing-ef-async-methods-with-sync-methods-with-moq
+            https://msdn.microsoft.com/en-us/data/dn314429#async */
         }
     }
 }

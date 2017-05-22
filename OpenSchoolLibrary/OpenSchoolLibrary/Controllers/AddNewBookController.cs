@@ -65,15 +65,7 @@ namespace OpenSchoolLibrary.Controllers
             }
             else
             {
-                /*
-                 TODO: Genres should be await .ToListAsync() but
-                 it's causing issues in the When_adding_a_new_book
-                 test class. This comment is only here as a "bookmark"
-                 at the end of the night. If you see it in the project
-                 feel free to let me know.
-                 */
-
-                model.Genres = genreList.GenreList();
+                model.Genres = await genreList.GenreList().ToListAsync();
                 model.Conditions = Enum.GetValues(typeof(BookConditions)).OfType<BookConditions>().ToList();
                 model.ISBN = book.ISBN;
                 model.ISBN13 = book.ISBN13;

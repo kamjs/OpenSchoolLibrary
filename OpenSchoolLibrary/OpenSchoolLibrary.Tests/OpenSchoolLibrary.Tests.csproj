@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -100,9 +106,11 @@
     <Compile Include="Controllers\BooksControllerTests.cs" />
     <Compile Include="Controllers\Return_Error_When_Adding_A_New_Book_With.cs" />
     <Compile Include="Controllers\When_adding_a_new_book.cs" />
+    <Compile Include="Stubs\ExtensionMethods.cs" />
     <Compile Include="Stubs\StubBookSaver.cs" />
     <Compile Include="Stubs\StubCheckForExistingISBN.cs" />
     <Compile Include="Stubs\StubGenreList.cs" />
+    <Compile Include="Stubs\TestDbAsyncEnumerable.cs" />
     <Compile Include="Validations\ISBNTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
