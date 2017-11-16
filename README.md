@@ -1,7 +1,7 @@
 # Open School Library
 
 ## Status:
-_This project is currently on hold as I move and start a new job._
+_The project is somewhat active. I'm working on it in my free time after work and on weekends._
 
 ## About:
 
